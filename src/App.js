@@ -217,12 +217,14 @@ class App extends Component {
     ],
   }
 
+
+  
   onTaggleFavorite = (name) => {
-    console.log('hi');
+
     this.setState(({ data }) => ({
       data: data.map(item => {
         if (item.name === name) {
-          console.log('+', name);
+
           return { ...item, favorites: !item.favorites }
         }
 
@@ -242,7 +244,7 @@ class App extends Component {
 
     return (
       <>
-        <Header />
+        <Header data={data}/>
         <div className='d-flex'>
           <ListItem />
           <div style={{ width: '100%' }}>
