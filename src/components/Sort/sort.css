@@ -1,0 +1,34 @@
+.sort {
+
+    border-bottom: 5px solid #2c9ad9;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.sort_header {
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sort_group-btn {
+    background-color: unset;
+    border: unset;
+    margin: 0;
+    padding: 0;
+    margin-right: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0.4;
+}
+
+.opacity-1 {
+    opacity: 1;
+}
+
+.sort_group-btn:last-child {
+    margin-right: 0;
+}
