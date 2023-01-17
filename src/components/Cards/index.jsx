@@ -7,11 +7,11 @@ import './cards.css';
 export default class Cards extends Component {
     render() {
 
-        const { data } = this.props;
+        const { data, onTaggleFavorite } = this.props;
 
         const cards = data.map(item => {
             return (
-                <Card {...item} />
+                <Card key={item.name} {...item} onTaggleFavorite={() => onTaggleFavorite(item.name)} />
             )
         })
 

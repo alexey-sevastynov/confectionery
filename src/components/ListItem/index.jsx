@@ -13,11 +13,11 @@ export default class ListItem extends Component {
 
     render() {
 
-      
+
 
         const item = this.items.map(item => {
             return (
-                <Item category={item.category} />
+                <Item key={item.category} category={item.category} />
             )
         })
 

@@ -13,20 +13,20 @@ export default class Card extends Component {
 
     render() {
 
-        const { name, img, raiting, price, priceSale, category, favorites, lenght, width, height } = this.props;
+        const { name, img, raiting, price, priceSale, category, favorites, lenght, width, height, onTaggleFavorite } = this.props;
 
         const favorite = favorites ?
             (
                 <img
                     className='heart'
-                    onClick={() => console.log(favorites)}
+                    onClick={onTaggleFavorite}
                     src={heartTrue} alt="icon-heart"
                     width={25} height={25} />
             ) :
             (
                 <img
                     className='heart'
-                    onClick={() => console.log(favorites)}
+                    onClick={onTaggleFavorite}
                     src={heartFalse} alt="icon-heart"
                     width={25} height={25} />
             );
