@@ -13,7 +13,7 @@ class App extends Component {
       {
         name: 'Брус Лісбудінвест зрощена конструкція 10х20х2000 мм сосна',
         img: 'https://cdn.27.ua/190/a3/9d/893853_4.jpeg',
-        rating: 5,
+        rating: 1,
         price: 35,
         priceSale: 10,
         category: 'beam',
@@ -218,7 +218,7 @@ class App extends Component {
   }
 
 
-  
+
   onTaggleFavorite = (name) => {
 
     this.setState(({ data }) => ({
@@ -238,18 +238,28 @@ class App extends Component {
   }
 
 
+  numbersStarActive = (num) => {
+    let arr = [];
+    for (let index = 0; index < num; index++) {
+      arr.push(index);
+      console.log('hi', num)
+    }
+    console.log(arr, num);
+  }
+
+
   render() {
 
     const { data } = this.state;
 
     return (
       <>
-        <Header data={data}/>
+        <Header data={data} />
         <div className='d-flex'>
           <ListItem />
           <div style={{ width: '100%' }}>
             <Sort />
-            <Cards data={data} onTaggleFavorite={this.onTaggleFavorite} />
+            <Cards data={data} onTaggleFavorite={this.onTaggleFavorite} numbersStarActive={this.numbersStarActive} />
           </div>
 
         </div>

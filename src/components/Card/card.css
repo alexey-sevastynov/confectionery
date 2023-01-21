@@ -6,16 +6,15 @@
 }
 
 .text-price {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    margin-right: 30px;
+    font-weight: 600;
     text-decoration: line-through;
 
 }
 
-.arrow-block {
-    position: relative;
-    margin-left: 100px;
+.red {
+    font-weight: 600;
+    color: rgb(255, 0, 0);
 }
 
 .arrow-block div {
