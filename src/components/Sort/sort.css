@@ -25,10 +25,13 @@
     opacity: 0.4;
 }
 
-.opacity-1 {
-    opacity: 1;
-}
+
 
 .sort_group-btn:last-child {
     margin-right: 0;
+}
+
+.active {
+
+    opacity: 1;
 }

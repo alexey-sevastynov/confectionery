@@ -1,0 +1,96 @@
+.window {
+
+
+    margin: 20px 0px 0px 0px;
+
+    width: 100%;
+    height: calc(100vh - 200px);
+
+}
+
+.window-header {
+    display: flex;
+
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.window-del-item {
+
+    height: 50px;
+    line-height: 50px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.window-del-item:hover {
+    text-decoration: underline;
+    color: rgb(0, 0, 255);
+}
+
+.window-items {
+    overflow: auto;
+    height: 446px;
+}
+
+.window-item {
+    margin: 5px 0px;
+    border: 1px solid rgb(79, 79, 79);
+    position: relative;
+    display: flex;
+    align-items: center;
+
+}
+
+.window-item img {
+    margin: 20px;
+}
+
+.window-item-name {
+    height: 100%;
+    width: 400px;
+    overflow: hidden
+}
+
+.count {
+    width: calc(100% - 400px - 200px - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.count-border {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.count-active:hover {
+    cursor: pointer;
+    background-color: rgb(193, 193, 193);
+}
+
+.count-active:hover {
+    cursor: pointer;
+    background-color: rgb(193, 193, 193);
+}
+
+.window-item-price {
+    width: 200px;
+    text-align: center;
+}
+
+.window-item-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.window-btn {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}

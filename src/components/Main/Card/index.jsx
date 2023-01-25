@@ -3,7 +3,7 @@ import heartFalse from './icon/heartFalse.png';
 import heartTrue from './icon/heartTrue.png';
 import starFalse from './icon/starFalse.png';
 import starTrue from './icon/starTrue.png';
-import arrow from './icon/arrow.png';
+// import arrow from './icon/arrow.png';
 
 import './card.css';
 
@@ -37,7 +37,8 @@ export default class Card extends Component {
 
 
 
-        const { name, img, rating, price, priceSale, category, favorites, lenght, width, height, onTaggleFavorite, numbersStarActive } = this.props;
+        const { name, img, rating, price, priceSale, favorites, length, width, height,
+             onTaggleFavorite, addCardInBasket } = this.props;
 
         const favorite = favorites ?
             (
@@ -140,15 +141,15 @@ export default class Card extends Component {
                 <div className="card-body">
                     {priceBlock}
 
-
-
-                    <p className="card-text">Довжина: 2000 мм</p>
-                    <p className="card-text">Висота: 20 мм</p>
-                    <p className="card-text">Ширина: 40 мм</p>
-
+                    <p className="card-text">Довжина: {length} мм</p>
+                    <p className="card-text">Висота: {height} мм</p>
+                    <p className="card-text">Ширина: {width} мм</p>
 
                 </div>
-                <button className="btn btn-lg btn-primary m-2" type="button">Купити</button>
+                <button
+                    className="btn btn-lg btn-primary m-2"
+                    onClick={() => addCardInBasket(name)}
+                >Купити</button>
             </div >
         )
     }

@@ -6,14 +6,14 @@ export default class Favorites extends Component {
 
   render() {
 
-    const { data } = this.props;
+    const { data, changeStateFavoriteOpened } = this.props;
 
     const count = data.filter(item => item.favorites === true).length;
 
     return (
       <button
         className="btn btn-secondary my-2 my-sm-0 mx-4"
-        onClick={() => console.log(count)}
+        onClick={() => changeStateFavoriteOpened()}
         type="submit">
         Favorites <sup>{count}</sup>
 
