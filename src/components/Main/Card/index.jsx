@@ -3,7 +3,7 @@ import heartFalse from './icon/heartFalse.png';
 import heartTrue from './icon/heartTrue.png';
 import starFalse from './icon/starFalse.png';
 import starTrue from './icon/starTrue.png';
-// import arrow from './icon/arrow.png';
+
 
 import './card.css';
 
@@ -38,20 +38,20 @@ export default class Card extends Component {
 
 
         const { name, img, rating, price, priceSale, favorites, length, width, height,
-             onTaggleFavorite, addCardInBasket } = this.props;
+            addCardInFavorite, addCardInBasket } = this.props;
 
         const favorite = favorites ?
             (
                 <img
                     className='heart'
-                    onClick={onTaggleFavorite}
+                    onClick={addCardInFavorite}
                     src={heartTrue} alt="icon-heart"
                     width={25} height={25} />
             ) :
             (
                 <img
                     className='heart'
-                    onClick={onTaggleFavorite}
+                    onClick={addCardInFavorite}
                     src={heartFalse} alt="icon-heart"
                     width={25} height={25} />
             );

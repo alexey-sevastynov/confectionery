@@ -8,11 +8,11 @@ export default class Basket extends Component {
 
     render() {
 
-        const { changeStatebasketOpened } = this.props;
+        const { changeStatebasketOpened, dataBasket } = this.props;
         return (
             <button
                 className="btn btn-secondary my-2 my-sm-0 mx-4" onClick={() => changeStatebasketOpened()}>
-                Basket <sup> {0}</sup>
+                Basket <sup> {dataBasket.length}</sup>
 
                 <img
                     src={basket} alt="icon-basket"

@@ -8,7 +8,7 @@ import Find from "../Find";
 class Header extends Component {
   render() {
 
-    const { data, changeStatebasketOpened, changeStateFavoriteOpened } = this.props;
+    const { newData, search, changeStatebasketOpened, changeStateFavoriteOpened, dataBasket } = this.props;
 
     return (
       <>
@@ -17,14 +17,16 @@ class Header extends Component {
             <div className="navbar-brand">Wood.ua</div>
 
             <div className="collapse navbar-collapse" id="navbarColor01">
-              <Find />
+              <Find search={search}  />
             </div>
 
             <Favorites
-              data={data}
+              data={newData}
               changeStateFavoriteOpened={changeStateFavoriteOpened}
             />
-            <Basket changeStatebasketOpened={changeStatebasketOpened} />
+            <Basket
+              dataBasket={dataBasket}
+              changeStatebasketOpened={changeStatebasketOpened} />
           </div>
         </nav>
 

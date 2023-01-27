@@ -81,6 +81,7 @@
 .window-item-price {
     width: 200px;
     text-align: center;
+    
 }
 
 .window-item-close {
@@ -93,4 +94,12 @@
     margin-top: 50px;
     display: flex;
     justify-content: space-around;
+}
+
+.cardss {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
 }

@@ -1,9 +1,11 @@
 import './app.css';
-import Cards from './components/Main/Cards';
+import Cards from './components/Main/Cards'
 import ListItem from './components/SidePanel/ListItem';
 import Header from './components/Head/Header';
 import Sort from './components/Sort';
 import { Component } from 'react';
+import BasketWindow from './components/WindowBasket/BasketWindow';
+import FavoriteWindow from './components/WindowFavorites/FavoriteWindow';
 
 class App extends Component {
 
@@ -420,6 +422,7 @@ class App extends Component {
         height: 30
       },
     ],
+    searchText: '',
     dataSort: [],
     dataBasket: [],
     dataFavorite: [],
@@ -481,22 +484,27 @@ class App extends Component {
     return arrayActivesNew.length === 0 || arrayActivesNew.length === 3 ? true : false;
   }
 
-  onTaggleFavorite = (name) => {
 
-    this.setState(({ data }) => ({
-      data: data.map(item => {
-        if (item.name === name) {
+  search = (event) => {
 
-          return { ...item, favorites: !item.favorites }
-        }
-
-        return item;
-
-      })
+    this.setState(() => ({
+      searchText: event.target.value
     }))
+
   }
 
+  searchCards = (string, obj) => {
 
+    if (string.length === 0) {
+
+      console.log('here');
+      console.log(string.length);
+      return obj;
+    }
+
+    return obj.filter(item => item.name.toLowerCase().indexOf(string) > -1);
+
+  }
 
   onTaggleActiveSort = async (category, nameSort) => {
 
@@ -595,59 +603,180 @@ class App extends Component {
   changeStatebasketOpened = () => {
     console.log('call changeStatebasketOpened()');
     this.setState(({ basketOpened }) => ({
-      basketOpened: !basketOpened
+      basketOpened: !basketOpened,
+      favoriteOpened: false
     }))
   }
 
   changeStateFavoriteOpened = () => {
     console.log('call changeStateFavoriteOpened()');
     this.setState(({ favoriteOpened }) => ({
-      favoriteOpened: !favoriteOpened
+      favoriteOpened: !favoriteOpened,
+      basketOpened: false
     }))
   }
 
   addCardInBasket = (name) => {
-    console.log(name);
 
-    const item = this.state.data.filter(item => item.name === name);
-    console.log(item);
+    const item = this.state.newData.filter(item => item.name === name);
+
+    if (!this.state.dataBasket.includes(...item)) {
+
+      this.setState(({ dataBasket }) => ({
+
+        dataBasket: [...dataBasket, ...item]
+
+      }))
+    }
+
+  }
+
+  removeCardFromBasket = (name) => {
 
     this.setState(({ dataBasket }) => ({
-      dataBasket: [...dataBasket, ...item]
+
+      dataBasket: dataBasket.filter(item => item.name !== name)
+
     }))
+
   }
+
+  removeAllCardsFromBasket = () => {
+
+    this.setState(({ dataBasket }) => ({
+
+      dataBasket: []
+
+    }))
+
+  }
+
+  removeAllCardsFromFavorite = () => {
+
+    this.setState(({ newData }) => ({
+
+      dataFavorite: [],
+      newData: newData.map(item => {
+        if (item.favorites === true) {
+          return { ...item, favorites: false }
+        }
+
+        return item;
+      })
+
+    }))
+
+  }
+
+  addCardInFavorite = async (name) => {
+
+    await this.setState(({ newData }) => ({
+      newData: newData.map(item => {
+        if (item.name === name) {
+          return { ...item, favorites: !item.favorites }
+        }
+
+        return item;
+
+      })
+    }))
+
+    const item = this.state.newData.filter(item => item.name === name);
+
+    if (item[0].favorites) {
+
+      await this.setState(({ dataFavorite }) => ({
+
+        dataFavorite: [...dataFavorite, ...item]
+
+      }))
+
+    } else (
+
+      await this.setState(({ dataFavorite }) => ({
+
+        dataFavorite: dataFavorite.filter(item => item.name !== name)
+
+      }))
+    )
+  }
+
 
   render() {
 
-    const { data, newData, dataBasket, basketOpened, favoriteOpened, dataSidePanel, dataSortPanel } = this.state;
+    const { newData, dataBasket, basketOpened, favoriteOpened, dataSidePanel, dataSortPanel, dataFavorite, searchText } = this.state;
+
+    const visibleData = this.searchCards(searchText, newData);
+    console.log(visibleData);
+
+    const cardsBasket = (
+      <BasketWindow
+        dataBasket={dataBasket}
+        newData={newData}
+        removeCardFromBasket={this.removeCardFromBasket}
+        removeAllCardsFromBasket={this.removeAllCardsFromBasket}
+
+
+      />
+    )
+
+    const cardsFavorite = (
+      <FavoriteWindow dataFavorite={dataFavorite} removeAllCardsFromFavorite={this.removeAllCardsFromFavorite} />
+    )
+
+
+    const main = (
+      <div className='d-flex'>
+        <ListItem
+          onTaggleActiveSort={this.onTaggleActiveSort}
+          dataSidePanel={dataSidePanel}
+          dataSortPanel={dataSortPanel}
+        />
+        <div style={{ width: '100%' }}>
+          <Sort dataSortPanel={dataSortPanel} sort={this.sort} />
+          <Cards
+            data={visibleData}
+            dataBasket={dataBasket}
+            addCardInFavorite={this.addCardInFavorite}
+            numbersStarActive={this.numbersStarActive}
+            basketOpened={basketOpened}
+            favoriteOpened={favoriteOpened}
+            addCardInBasket={this.addCardInBasket}
+            removeCardFromBasket={this.removeCardFromBasket}
+
+          />
+        </div>
+
+      </div>
+    )
+
+
 
     return (
       <>
+
+
         <Header
-          data={data}
+          newData={newData}
+          search={this.search}
+
+
+          dataBasket={dataBasket}
           changeStatebasketOpened={this.changeStatebasketOpened}
           changeStateFavoriteOpened={this.changeStateFavoriteOpened}
         />
-        <div className='d-flex'>
-          <ListItem
-            onTaggleActiveSort={this.onTaggleActiveSort}
-            dataSidePanel={dataSidePanel}
-            dataSortPanel={dataSortPanel}
-          />
-          <div style={{ width: '100%' }}>
-            <Sort dataSortPanel={dataSortPanel} sort={this.sort} />
-            <Cards
-              data={newData}
-              dataBasket={dataBasket}
-              onTaggleFavorite={this.onTaggleFavorite}
-              numbersStarActive={this.numbersStarActive}
-              basketOpened={basketOpened}
-              favoriteOpened={favoriteOpened}
-              addCardInBasket={this.addCardInBasket}
-            />
-          </div>
 
-        </div>
+        {favoriteOpened ? cardsFavorite : null}
+        {basketOpened ? cardsBasket : null}
+
+        {!(favoriteOpened || basketOpened) ? main : null}
+
+
+
+
+
+
+
       </>
 
     );
